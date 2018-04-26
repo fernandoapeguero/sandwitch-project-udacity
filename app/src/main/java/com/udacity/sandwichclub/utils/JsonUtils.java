@@ -31,10 +31,14 @@ public class JsonUtils {
             image = jsonMainObject.getString("image");
             JSONArray knownsArray =  nameObject.getJSONArray("alsoKnownAs");
 
-            for(int i =0; i < knownsArray.length() ; i++){
-                alsoknows.add(knownsArray.get(i).toString());
-            }
+         if(knownsArray.length() > 0){
+             for(int i =0; i < knownsArray.length() ; i++){
+                 alsoknows.add(knownsArray.get(i).toString());
+             }
 
+         } else {
+             alsoknows.add("Not available");
+         }
 
              JSONArray ingredientsArray = jsonMainObject.getJSONArray("ingredients");
               for(int i =0; i < ingredientsArray.length() ; i++){

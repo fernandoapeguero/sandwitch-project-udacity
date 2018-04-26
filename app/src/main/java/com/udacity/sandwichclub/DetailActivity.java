@@ -75,23 +75,35 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI(String description, List<String> ingredientsData, List<String> knownData, String name) {
+    private void populateUI(String description, List<String> ingredientsData, List<String> knownData, String name ) {
         originTextView.setText(name);
         descriptionTextView.setText(description);
 
-        StringBuilder knownNameBuilder = new StringBuilder();
-        for (int i = 0; i < knownData.size(); i++) {
-           knownNameBuilder.append(knownData.get(i));
+        StringBuilder knownBuilder = new StringBuilder();
+        for (int i =0 ; i < knownData.size(); i++){
+            if (i != knownData.size() -1) {
+                knownBuilder.append(knownData.get(i)).append(", ");
+            } else if (knownData.isEmpty()){
+                    knownBuilder.append("Not Available");
+            } else {
+                knownBuilder.append(knownData.get(i));
+            }
         }
+
+
 
         StringBuilder ingredientsBuilder = new StringBuilder();
         for (int i =0 ; i < ingredientsData.size(); i++){
-            ingredientsBuilder.append(ingredientsData.get(i));
+                if (i != ingredientsData.size() -1) {
+                    ingredientsBuilder.append(ingredientsData.get(i)).append(", ");
+                } else {
+                    ingredientsBuilder.append(ingredientsData.get(i));
+                }
         }
 
         ingredientsBuilder.append(".");
         ingredientsTextView.setText(ingredientsBuilder);
-        alsoKnownTv.setText(knownNameBuilder);
+        alsoKnownTv.setText(knownBuilder);
 
 
     }
