@@ -21,10 +21,14 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
-    @BindView(R.id.origin_tv) TextView originTextView;
-    @BindView(R.id.description_tv) TextView descriptionTextView;
-    @BindView(R.id.ingredients_tv) TextView ingredientsTextView;
-    @BindView(R.id.also_known_tv) TextView alsoKnownTv;
+    @BindView(R.id.origin_tv)
+    TextView originTextView;
+    @BindView(R.id.description_tv)
+    TextView descriptionTextView;
+    @BindView(R.id.ingredients_tv)
+    TextView ingredientsTextView;
+    @BindView(R.id.also_known_tv)
+    TextView alsoKnownTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,7 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        populateUI(sandwich.getDescription() , sandwich.getIngredients() , sandwich.getAlsoKnownAs() , sandwich.getMainName());
+        populateUI(sandwich.getDescription(), sandwich.getIngredients(), sandwich.getAlsoKnownAs(), sandwich.getMainName());
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
@@ -71,18 +75,23 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI(String description , List<String> ingredients , List<String> alsoKnownData , String name) {
-       originTextView.setText(name);
-       descriptionTextView.setText(description);
+    private void populateUI(String description, List<String> ingredientsData, List<String> knownData, String name) {
+        originTextView.setText(name);
+        descriptionTextView.setText(description);
 
-       String knownNames = "";
+        StringBuilder knownNameBuilder = new StringBuilder();
+        for (int i = 0; i < knownData.size(); i++) {
+           knownNameBuilder.append(knownData.get(i));
+        }
 
-       for (int i = 0; i < alsoKnownData.size() ;i++){
+        StringBuilder ingredientsBuilder = new StringBuilder();
+        for (int i =0 ; i < ingredientsData.size(); i++){
+            ingredientsBuilder.append(ingredientsData.get(i));
+        }
 
-           knownNames += alsoKnownData.get(i) + ", ";
-       }
-       ingredientsTextView.setText(String.valueOf(ingredients));
-       alsoKnownTv.setText(knownNames);
+        ingredientsBuilder.append(".");
+        ingredientsTextView.setText(ingredientsBuilder);
+        alsoKnownTv.setText(knownNameBuilder);
 
 
     }

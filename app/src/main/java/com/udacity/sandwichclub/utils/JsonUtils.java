@@ -29,20 +29,15 @@ public class JsonUtils {
             placeOfOrigin = jsonMainObject.getString("placeOfOrigin");
             description = jsonMainObject.getString("description");
             image = jsonMainObject.getString("image");
-            JSONArray knownsArray =  jsonMainObject.getJSONArray("alsoKnownAs");
+            JSONArray knownsArray =  nameObject.getJSONArray("alsoKnownAs");
 
-            List<String> list = new ArrayList<>(0);
-            if (knownsArray!=null){
-                for (int i=0; i<knownsArray.length();i++){
-                    try {
-                        list.add(knownsArray.getString(i));
-                    } catch (JSONException e) {
-                        Log.e(JsonUtils.class.getName(), "Problems with array list", e);
-                    }
-                }
+            for(int i =0; i < knownsArray.length() ; i++){
+                alsoknows.add(knownsArray.get(i).toString());
             }
+
+
              JSONArray ingredientsArray = jsonMainObject.getJSONArray("ingredients");
-              for(int i =0; i < knownsArray.length() ; i++){
+              for(int i =0; i < ingredientsArray.length() ; i++){
                 ingreString.add(ingredientsArray.get(i).toString());
               }
 
