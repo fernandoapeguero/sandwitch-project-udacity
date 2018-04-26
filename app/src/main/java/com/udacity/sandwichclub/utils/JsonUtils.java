@@ -20,8 +20,8 @@ public class JsonUtils {
         String placeOfOrigin= "" ;
         String description = "";
         String image = "";
-        List<String> ingreString= new ArrayList<>();
-        List<String> alsoknows = new ArrayList<>();
+        List<String> ingredientsList = new ArrayList<>();
+        List<String> knownNameList = new ArrayList<>();
         try{
             jsonMainObject = new JSONObject(json);
             JSONObject nameObject = jsonMainObject.getJSONObject("name");
@@ -33,23 +33,23 @@ public class JsonUtils {
 
          if(knownsArray.length() > 0){
              for(int i =0; i < knownsArray.length() ; i++){
-                 alsoknows.add(knownsArray.get(i).toString());
+                 knownNameList.add(knownsArray.get(i).toString());
              }
 
          } else {
-             alsoknows.add("Not available");
+             knownNameList.add("Not available");
          }
 
              JSONArray ingredientsArray = jsonMainObject.getJSONArray("ingredients");
               for(int i =0; i < ingredientsArray.length() ; i++){
-                ingreString.add(ingredientsArray.get(i).toString());
+                ingredientsList.add(ingredientsArray.get(i).toString());
               }
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return new Sandwich(mainName , alsoknows , placeOfOrigin , description , image , ingreString);
+        return new Sandwich(mainName , knownNameList , placeOfOrigin , description , image , ingredientsList);
     }
 
 
